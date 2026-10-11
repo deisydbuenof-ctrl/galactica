@@ -4,12 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowDown, ChevronRight, Heart, Mail, Music2, Pause, Play, Sparkles, X } from 'lucide-react'
 
 const memories = [
-  { date: 'JUN 2025', title: 'Un beso eterno', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250619-WA0037-BylpSVnuWSADCS7u3wXEwWhcLg5bF1.jpg', secret: 'Un beso que hizo que todos los planetas se alinearan por un instante.' },
-  { date: 'OCT 2025', title: 'Risas infinitas', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251027_161903-kvPFyMyv0KN89aF4FigzTnLmcq9Tgz.jpg', secret: 'Tu risa es mi constelación favorita. Siempre encuentro el camino de regreso a ella.' },
-  { date: 'MAY 2025', title: 'Un día para celebrar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250504-WA0204-O6ZDiqOD0m9JZy1yvL4fe9u2w7pfmR.jpg', secret: 'Entre sombreros, regalos y sonrisas, celebramos otro recuerdo para nuestra galaxia.' },
-  { date: 'JUN 2025', title: 'Cabeza con cabeza', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20250620_120532-HhvN9bsC1dCbvCcLwZMlCSqSOLoo4w.jpg', secret: 'No necesitamos decir nada cuando nuestros corazones ya hablan el mismo idioma.' },
-  { date: 'NOV 2025', title: 'Juntos en cualquier lugar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251103_172535-QLU18UOWsV3vttTfmBaifkyYRuHY5W.jpg', secret: 'Tu abrazo convierte cualquier paisaje en nuestro lugar favorito.' },
   { date: 'AGO 2024', title: 'Nuestros comienzos', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1723767202167-wbawoSY0oxsF6w46LpdEYYGoXHSQWk.jpg', secret: 'El inicio de nuestra pequeña galaxia. Ese día el universo decidió acercarnos.' },
+  { date: 'MAY 2025', title: 'Un día para celebrar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250504-WA0204-O6ZDiqOD0m9JZy1yvL4fe9u2w7pfmR.jpg', secret: 'Entre sombreros, regalos y sonrisas, celebramos otro recuerdo para nuestra galaxia.' },
+  { date: 'JUN 2025', title: 'Un beso eterno', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250619-WA0037-BylpSVnuWSADCS7u3wXEwWhcLg5bF1.jpg', secret: 'Un beso que hizo que todos los planetas se alinearan por un instante.' },
+  { date: 'JUN 2025', title: 'Cabeza con cabeza', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20250620_120532-HhvN9bsC1dCbvCcLwZMlCSqSOLoo4w.jpg', secret: 'No necesitamos decir nada cuando nuestros corazones ya hablan el mismo idioma.' },
+  { date: 'OCT 2025', title: 'Risas infinitas', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251027_161903-kvPFyMyv0KN89aF4FigzTnLmcq9Tgz.jpg', secret: 'Tu risa es mi constelación favorita. Siempre encuentro el camino de regreso a ella.' },
+  { date: 'NOV 2025', title: 'Juntos en cualquier lugar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251103_172535-QLU18UOWsV3vttTfmBaifkyYRuHY5W.jpg', secret: 'Tu abrazo convierte cualquier paisaje en nuestro lugar favorito.' },
 ]
 
 function TimeCounter() {
@@ -28,6 +28,7 @@ function TimeCounter() {
 
 export default function Page() {
   const [selectedMemory, setSelectedMemory] = useState<typeof memories[number] | null>(null)
+  const [flippedMemory, setFlippedMemory] = useState<string | null>(null)
   const [letterOpen, setLetterOpen] = useState(false)
   const [playing, setPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -66,7 +67,7 @@ export default function Page() {
 
       <section className="section-shell memories-section">
         <div className="section-heading left-heading"><p className="section-label">NUESTROS MOMENTOS</p><h2>Constelación de <em>recuerdos</em></h2><p className="instruction"><Sparkles /> TOCA CADA FOTO PARA DESCUBRIR SU SECRETO</p></div>
-        <div className="memory-grid">{memories.map((memory, index) => <button key={memory.title} className={`memory-card card-${index + 1}`} onClick={() => setSelectedMemory(memory)}><img src={memory.image} alt={memory.title} /><span className="memory-shade" /><div className="memory-copy"><small>{memory.date}</small><h3>{memory.title}</h3><ChevronRight /></div></button>)}</div>
+        <div className="memory-grid">{memories.map((memory, index) => <button key={memory.title} className={`memory-card card-${index + 1} ${flippedMemory === memory.title ? 'is-flipped' : ''}`} onClick={() => setFlippedMemory((current) => current === memory.title ? null : memory.title)} aria-label={`${memory.title}. Toca para ${flippedMemory === memory.title ? 'ver la foto' : 'leer el recuerdo'}`}><span className="memory-card-inner"><span className="memory-face memory-front"><img src={memory.image} alt={memory.title} /><span className="memory-shade" /><span className="memory-copy"><small>{memory.date}</small><strong>{memory.title}</strong><ChevronRight /></span></span><span className="memory-face memory-back"><span className="back-date">{memory.date}</span><strong>{memory.title}</strong><span>{memory.secret}</span><span className="back-hint">TOCA PARA VOLVER A LA FOTO</span></span></span></button>)}</div>
       </section>
 
       <section className="letter-section section-shell">
