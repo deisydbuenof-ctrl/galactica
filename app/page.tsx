@@ -4,12 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowDown, ChevronRight, Heart, Mail, Music2, Pause, Play, Sparkles, X } from 'lucide-react'
 
 const memories = [
-  { date: 'AGO 2024', title: 'Nuestros comienzos', image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=85', secret: 'El inicio de nuestra pequeña galaxia. Ese día el universo decidió acercarnos.' },
-  { date: 'MAY 2025', title: 'De fiesta juntos', image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=85', secret: 'Entre luces, música y risas, mi lugar favorito seguía siendo a tu lado.' },
-  { date: 'JUN 2025', title: 'Un beso eterno', image: 'https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=900&q=85', secret: 'Un beso que hizo que todos los planetas se alinearan por un instante.' },
-  { date: 'JUN 2025', title: 'Cabeza con cabeza', image: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=85', secret: 'No necesitamos decir nada cuando nuestros corazones ya hablan el mismo idioma.' },
-  { date: 'OCT 2025', title: 'Risas infinitas', image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85', secret: 'Tu risa es mi constelación favorita. Siempre encuentro el camino de regreso a ella.' },
-  { date: 'NOV 2025', title: 'Para siempre', image: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=85', secret: 'Si pudiera elegir un lugar en todo el universo, te elegiría a ti. Una y otra vez.' },
+  { date: 'JUN 2025', title: 'Un beso eterno', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250619-WA0037-BylpSVnuWSADCS7u3wXEwWhcLg5bF1.jpg', secret: 'Un beso que hizo que todos los planetas se alinearan por un instante.' },
+  { date: 'OCT 2025', title: 'Risas infinitas', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251027_161903-kvPFyMyv0KN89aF4FigzTnLmcq9Tgz.jpg', secret: 'Tu risa es mi constelación favorita. Siempre encuentro el camino de regreso a ella.' },
+  { date: 'MAY 2025', title: 'Un día para celebrar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250504-WA0204-O6ZDiqOD0m9JZy1yvL4fe9u2w7pfmR.jpg', secret: 'Entre sombreros, regalos y sonrisas, celebramos otro recuerdo para nuestra galaxia.' },
+  { date: 'JUN 2025', title: 'Cabeza con cabeza', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20250620_120532-HhvN9bsC1dCbvCcLwZMlCSqSOLoo4w.jpg', secret: 'No necesitamos decir nada cuando nuestros corazones ya hablan el mismo idioma.' },
+  { date: 'NOV 2025', title: 'Juntos en cualquier lugar', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20251103_172535-QLU18UOWsV3vttTfmBaifkyYRuHY5W.jpg', secret: 'Tu abrazo convierte cualquier paisaje en nuestro lugar favorito.' },
+  { date: 'AGO 2024', title: 'Nuestros comienzos', image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1723767202167-wbawoSY0oxsF6w46LpdEYYGoXHSQWk.jpg', secret: 'El inicio de nuestra pequeña galaxia. Ese día el universo decidió acercarnos.' },
 ]
 
 function TimeCounter() {
